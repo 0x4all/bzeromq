@@ -1,0 +1,22 @@
+{
+  "name": "bzeromq",
+  "version": "1.0.0",
+  "description": "zeromq for nodejs addon",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0x4all/bzeromq.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/0x4all/bzeromq/issues"
+  },
+  "homepage": "https://github.com/0x4all/bzeromq#readme"
+}
