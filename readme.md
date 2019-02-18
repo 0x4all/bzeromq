@@ -1,8 +1,9 @@
 
 Node.js v11.10 版本编译的zeromq 4.3.1, 包含darwin和linux版本
 
-libzmq: https://github.com/zeromq/libzmq
-Node.js扩展: https://github.com/zeromq/zeromq.js
+libzmq源码地址: https://github.com/zeromq/libzmq
+
+Node.js扩展源码地址: https://github.com/zeromq/zeromq.js
 
 
 1. 先编译libzmq后安装
