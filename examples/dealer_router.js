@@ -30,7 +30,7 @@ if (cluster.isMaster) {
 
       console.log(socket.identity + ': asking ' + value);
       socket.send(value);
-    }, 100);
+    }, 3000);
 
 
     socket.on('message', function(data) {
