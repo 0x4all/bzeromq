@@ -853,3 +853,5 @@ function proxy (frontend, backend, capture){
 }
 
 exports.proxy = proxy;
+
+exports.helpers = require("./helpers");

@@ -1,6 +1,6 @@
 {
   "name": "bzeromq",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "zeromq for nodejs addon",
   "main": "index.js",
   "directories": {

@@ -12,3 +12,20 @@ Node.js扩展源码地址: https://github.com/zeromq/zeromq.js
         'variables': {
             'zmq_external%': 'true',
         },
+
+
+# note
+
+dealer/req
+发送请求，接受响应
+dealer.send:
+    当作为1端的时候，轮询发送给N端
+    当作为N端的时候，发送1端
+req.send
+    当作为1端的时候，轮询发给每个N端
+    当作为N端的时候，发送1端
+
+rep.send
+    无论N端1端，都发送给对端
+router.send:
+    
