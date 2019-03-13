@@ -21,7 +21,7 @@ function client(socket, handler, opts){
         if(msg.__reqid){
             var info = this.cbs[msg.__reqid];
             if(info && info.cb){
-                info.cb(null, msg.d);
+                info.cb(null, msg.data);
             }
             delete this.cbs[msg.__reqid];
         }
