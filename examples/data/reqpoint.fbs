@@ -1,0 +1,9 @@
+table ReqPoint {
+  __reqid:uint32;
+  route: string;
+  method: string;
+  x: float;
+  y: float;
+}
+
+root_type ReqPoint;

@@ -3,7 +3,7 @@
  * 
  * @param {*} socket 
  * @param {*} handler 
- * @param {{ protocol, limitps}} opts 
+ * @param {{ protocol, limitps, getrespid:(msg)=>number}} opts 
  */
 function client(socket, handler, opts){
     this.reqid = 1;
@@ -14,19 +14,20 @@ function client(socket, handler, opts){
     this.protocol = opts.protocol || JSON;
     this.checktime = (opts.checktime) || 1000;
     this.limit = (opts.limitps || 1000) * this.checktime/1000;
-
+    this.getrespid = opts.getrespid || ((msg)=>{ return msg.respid;});
     // zmqsocket
     this.socket.on("message",(buffer)=>{
         var msg = this.protocol.parse(buffer);
-        if(msg.__reqid){
-            var info = this.cbs[msg.__reqid];
+        var respid = this.getrespid(msg);
+        if(respid){
+            var info = this.cbs[respid];
             if(info && info.cb){
-                info.cb(null, msg.data);
+                info.cb(null, msg);
             }
-            delete this.cbs[msg.__reqid];
+            delete this.cbs[respid];
         }
         else{
-            handler(msg);
+            handler(msg, this);
         }
     });
 }
@@ -75,12 +76,12 @@ client.prototype.req = function (route, method, data, cb){
     }
     
     var msg = {};
-    msg.__reqid = this.reqid++;
+    msg.reqid = this.reqid++;
     msg.route = route;
     msg.method = method;
     msg.data = data;
     this.socket.send(this.protocol.stringify(msg));
-    this.cbs[msg.__reqid] = {cb:cb, time:Date.now()};
+    this.cbs[msg.reqid] = {cb:cb, time:Date.now()};
     this.sendcount++;
 }
 

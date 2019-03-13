@@ -2,8 +2,8 @@
 /**
  * 
  * @param {*} socket 
- * @param {(clientid:Buffer, msg:any, next: (reqid:number, pkg)=>void)=>void} handler 
- * @param {{protocol, limitps:number}} opts 
+ * @param {(clientid:Buffer, msg:any} handler 
+ * @param {{protocol, limitps:number} opts 
  */
 function server(socket, handler, opts){
     this.socket = socket;
@@ -27,20 +27,19 @@ function server(socket, handler, opts){
         }   //阈值可以使用mem来动态计算；
 
         this.recvcount++;
-        var msg = this.protocol.parse(buffer);
-        handler(clientid, msg, (reqid, data)=>{
-            if(!reqid){
-                return;
-            }
-            this.socket.send([clientid, this.protocol.stringify(data)]);
-        })
-        
+        var pkg = this.protocol.parse(buffer);
+        handler(clientid, pkg, this);
     });
 }
 
 module.exports = server;
 
 
-server.prototype.push = function(clientid, data){
-    this.socket.send([clientid, this.protocol.stringify(data)]);
+server.prototype.push = function(clientid, pkg){
+    this.socket.send([clientid, this.protocol.stringify(pkg)]);
+}
+
+
+server.prototype.response = function(clientid, pkg){
+    this.socket.send([clientid, this.protocol.stringify(pkg)]);
 }

@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/0x4all/bzeromq/issues"
   },
-  "homepage": "https://github.com/0x4all/bzeromq#readme"
+  "homepage": "https://github.com/0x4all/bzeromq#readme",
+  "dependencies": {
+    "flatbuffers": "git+https://github.com/evanw/node-flatbuffers.git"
+  }
 }
